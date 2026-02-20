@@ -1,5 +1,6 @@
 # Python
 __pycache__/
+.pytest_cache/
 *.py[cod]
 *.pyo
 *.pyd
@@ -7,6 +8,7 @@ __pycache__/
 
 # Entorno virtual
 .venv/
+dashboard_usd_mxn.egg-info/
 
 # VS Code
 .vscode/

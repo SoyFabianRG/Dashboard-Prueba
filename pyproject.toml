@@ -12,3 +12,13 @@ dependencies = [
 	"fastapi[standard]>=0.95.0",
 ]
 
+[tool.setuptools]
+py-modules = ["main"]
+
+
+[project.optional-dependencies]
+dev = [
+	"pytest",
+	"debugpy"
+]
+

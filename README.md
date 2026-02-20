@@ -2,6 +2,12 @@
 
 Dashboard interactivo que muestra la evolución del tipo de cambio USD → MXN, construido con **FastAPI**, **Chart.js** y datos desde un archivo CSV.
 
+```bash
+uv venv; overlay use .venv/bin/activate.nu; uv pip install -e .; fastapi dev
+```
+
+El dashboard estará disponible en **http://127.0.0.1:8000**.
+
 ## Requisitos
 
 - Python >= 3.10
@@ -9,15 +15,36 @@ Dashboard interactivo que muestra la evolución del tipo de cambio USD → MXN, 
 
 ## Instalación y ejecución
 
+### Instalacion recomendada (brew + pipx + venv)
+
+Para evitar problemas de `pip` global con Homebrew:
+
+```bash
+brew install python pipx ruff
+pipx ensurepath
+pipx install basedpyright
+```
+
+Notas:
+
+- `ruff`: lint y formato.
+- `basedpyright`: LSP para autocompletado y diagnosticos.
+- `pipx`: instala herramientas globales sin ensuciar el Python global.
+
 ### Con `uv` (recomendado)
 
 ```bash
 uv venv
-source .venv/bin/activate        # bash / zsh
-# overlay use .venv/bin/activate.nu  # nushell
+#source .venv/bin/activate        # bash / zsh
+overlay use .venv/bin/activate.nu  # nushell
 uv pip install -e .
 fastapi dev main.py
 ```
+
+Que instala esto:
+
+- `pytest`: ejecucion de tests.
+- `debugpy`: backend de debugging para `nvim-dap-python`.
 
 ### Con `pip`
 
@@ -28,22 +55,23 @@ pip install -e .
 fastapi dev main.py
 ```
 
-El dashboard estará disponible en **http://127.0.0.1:8000**.
+### Flujo diario (cada vez que trabajes)
 
-## Estructura del proyecto
-
-```
-├── main.py                  # Backend FastAPI
-├── pyproject.toml           # Dependencias del proyecto
-├── data/
-│   └── usd_mxn.csv          # Datos del tipo de cambio
-└── templates/
-    └── dashboard.html        # Frontend (HTML + CSS + JS)
+```bash
+cd tu-proyecto
+overlay use .venv/bin/activate.nu
+nvim .
 ```
 
-## API
+### NVIM
 
-| Endpoint               | Descripción                                           |
-| ---------------------- | ----------------------------------------------------- |
-| `GET /`                | Sirve el dashboard HTML                               |
-| `GET /api/tipo-cambio` | Datos JSON, acepta `?desde=` y `?hasta=` (YYYY-MM-DD) |
+Dentro de Neovim:
+
+1. `<leader>cv` o `:VenvSelect`para seleccionar `.venv` (primera vez por proyecto).
+2. Abre un archivo `.py`.
+3. Usa estos atajos:
+   - `<leader>pr`: ejecutar archivo actual.
+   - `<leader>pt`: correr `pytest` del archivo actual.
+   - `<leader>pT`: correr toda la suite de tests.
+   - `<leader>dPt`: debug del test actual.
+   - `<leader>dPc`: debug de la clase de tests.
