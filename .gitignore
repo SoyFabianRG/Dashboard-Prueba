@@ -29,7 +29,7 @@ Thumbs.db
 *.log
 
 # Ignorar todo el contenido de la carpeta data (los csv a veces son pesados para Git)
-data/**/*
+# data/**/*
 
-# Pero NO ignorar los archivos .gitkeep (esto mantiene la carpeta en GitHub)
-!data/**/.gitkeep
+# # Pero NO ignorar los archivos .gitkeep (esto mantiene la carpeta en GitHub)
+# !data/**/.gitkeep
